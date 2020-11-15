@@ -9,6 +9,11 @@ namespace StarWars.Data.Services
 {
     public class StarWarsRepository : IStarWarsRepository
     {
+        /// <summary>
+        /// This Guid is necessarry because Guid.Empty is overriden by EF
+        /// </summary>
+        private const string DefaultNullGuidValue = "{11111111-1111-1111-1111-111111111111}";
+
         private readonly SwContext _context;
 
         public StarWarsRepository(SwContext context)
@@ -77,11 +82,13 @@ namespace StarWars.Data.Services
 
         public Species GetNullSpecies()
         {
-            if (!_context.Species.Any(s => s.Id == Guid.Empty))
+            var controlGuid = new Guid(DefaultNullGuidValue);
+            Species tempSpecies = null;
+            if (!_context.Species.Any(s => s.Id == controlGuid))
             {
-                var tempSpecies = new Species
+                tempSpecies = new Species
                 { 
-                    Id = Guid.Empty,
+                    Id = controlGuid,
                     Name = String.Empty
                 };                
                 
@@ -89,7 +96,7 @@ namespace StarWars.Data.Services
                 Save();
             }
 
-            return _context.Species.FirstOrDefault();
+            return _context.Species.FirstOrDefault(s => s.Id == controlGuid);
         }
 
         public bool SpeciesExist(string speciesName)

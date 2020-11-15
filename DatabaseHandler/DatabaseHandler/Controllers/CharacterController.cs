@@ -31,7 +31,7 @@ namespace DatabaseHandler.Controllers
                 {
                     var species = new Species { Name = character.SpeciesName };
                     _starWarsRepository.AddSpecies(species);
-                    _starWarsRepository.Save(); //?
+                    _starWarsRepository.Save();
                 }
                 
                 tempSpecies = _starWarsRepository.GetSpecies(character.SpeciesName);
