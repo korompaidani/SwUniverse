@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StarWars.Data.Models;
+using StarWars.Data.Entities;
 
 namespace StarWars.Data
 {
@@ -9,8 +9,8 @@ namespace StarWars.Data
         {
         }
 
-        public DbSet<SwCharacter> Characters { get; set; }
-        public DbSet<SwEvent> Events { get; set; }
-        public DbSet<SwLifeTime> Lifetimes { get; set; }
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<LifeTime> Lifetimes { get; set; }
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StarWars.Data.Models
+namespace StarWars.Data.Entities
 {
-    public class SwCharacter
+    public class Character
     {        
         public Guid Id { get; set; }
         public string Name { get; set; }

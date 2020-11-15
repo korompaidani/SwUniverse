@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace StarWars.Data.Models
+namespace StarWars.Data.Entities
 {
     [Keyless]
-    public class SwLifeTime
+    public class LifeTime
     {
         public Guid Id { get; set; }
         public int BeginDate { get; set; }
