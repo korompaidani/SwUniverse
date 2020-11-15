@@ -47,5 +47,10 @@ namespace StarWars.Data.Services
 
             return _context.Characters.FirstOrDefault(c => c.Id == characterId);
         }
+
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
     }
 }

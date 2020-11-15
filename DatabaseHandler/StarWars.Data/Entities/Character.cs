@@ -19,9 +19,9 @@ namespace StarWars.Data.Entities
         [MaxLength(50)]
         public string GivenName { get; set; }
 
-        [ForeignKey("SpeciesId")]
-        public Species Species { get; set; }
+        //[ForeignKey("SpeciesId")]
+        //public Species Species { get; set; }
 
-        public Guid SpeciesId { get; set; }
+        //public Guid SpeciesId { get; set; }
     }
 }

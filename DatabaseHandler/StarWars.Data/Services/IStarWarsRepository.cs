@@ -12,5 +12,7 @@ namespace StarWars.Data.Services
         Character GetCharacter(Guid characterId);
 
         bool CharacterExist(Guid characterId);
+
+        bool Save();
     }
 }

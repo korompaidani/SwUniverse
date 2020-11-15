@@ -6,6 +6,6 @@ namespace StarWars.Data.Models.Creatures.Character
     {
         public Guid Id { get; set; }
 
-        public Guid SpeciesId { get; set; }
+        //public Guid SpeciesId { get; set; }
     }
 }

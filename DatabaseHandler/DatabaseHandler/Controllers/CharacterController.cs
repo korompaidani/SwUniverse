@@ -28,20 +28,17 @@ namespace DatabaseHandler.Controllers
                 Name = character.Name,
                 FamilyName = character.FamilyName,
                 GivenName = character.GivenName,
-                Species = null,
-                SpeciesId = Guid.Empty
             };
 
             _starWarsRepository.AddCharacter(tempCharacter);
+            _starWarsRepository.Save();
 
             var resultCharacterDto = new CharacterDto
             {
                 Id = tempCharacter.Id,
                 Name = tempCharacter.Name,
-                FamilyName = tempCharacter.Name,
-                GivenName = tempCharacter.Name,
-                Species = null,
-                SpeciesId = Guid.Empty
+                FamilyName = tempCharacter.FamilyName,
+                GivenName = tempCharacter.GivenName
             };
 
             return CreatedAtRoute("GetCharacter",
@@ -65,9 +62,7 @@ namespace DatabaseHandler.Controllers
                 Id = characterFromRepo.Id,
                 Name = characterFromRepo.Name,
                 FamilyName = characterFromRepo.Name,
-                GivenName = characterFromRepo.Name,
-                Species = null,
-                SpeciesId = Guid.Empty
+                GivenName = characterFromRepo.Name
             };
 
             return Ok(resultCharacterDto);
