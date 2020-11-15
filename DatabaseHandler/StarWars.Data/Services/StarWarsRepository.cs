@@ -12,7 +12,7 @@ namespace StarWars.Data.Services
         /// <summary>
         /// This Guid is necessarry because Guid.Empty is overriden by EF
         /// </summary>
-        private const string DefaultNullGuidValue = "{11111111-1111-1111-1111-111111111111}";
+        private const string DefaultSpeciesName = "Unknown";
 
         private readonly SwContext _context;
 
@@ -39,8 +39,6 @@ namespace StarWars.Data.Services
             {
                 throw new ArgumentNullException(nameof(species));
             }
-
-            species.Id = new Guid();
 
             _context.Species.Add(species);
         }
@@ -82,21 +80,19 @@ namespace StarWars.Data.Services
 
         public Species GetDefaultSpecies()
         {
-            var controlGuid = new Guid(DefaultNullGuidValue);
             Species tempSpecies = null;
-            if (!_context.Species.Any(s => s.Id == controlGuid))
+            if (!_context.Species.Any(s => s.Name == DefaultSpeciesName))
             {
                 tempSpecies = new Species
                 { 
-                    Id = controlGuid,
-                    Name = String.Empty
+                    Name = DefaultSpeciesName
                 };                
                 
                 _context.Species.Add(tempSpecies);
                 Save();
             }
 
-            return _context.Species.FirstOrDefault(s => s.Id == controlGuid);
+            return _context.Species.FirstOrDefault(s => s.Name == DefaultSpeciesName);
         }
 
         public bool SpeciesExist(string speciesName)

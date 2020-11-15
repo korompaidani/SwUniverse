@@ -9,10 +9,7 @@ namespace StarWars.Data.Entities
     public class Species
     {
         [Key]
-        public Guid Id { get; set; }
-
-        [Required]
-        [MaxLength(50)]
+        [MaxLength(15)]
         public string Name { get; set; }
     }
 }

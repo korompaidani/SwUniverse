@@ -44,7 +44,7 @@ namespace DatabaseHandler.Controllers
 
             var tempCharacter = _mapper.Map<Character>(character);
             tempCharacter.Species = tempSpecies;
-            tempCharacter.SpeciesId = tempSpecies.Id;
+            tempCharacter.SpeciesName = tempSpecies.Name;
             
             _starWarsRepository.AddCharacter(tempCharacter);
             _starWarsRepository.Save();
