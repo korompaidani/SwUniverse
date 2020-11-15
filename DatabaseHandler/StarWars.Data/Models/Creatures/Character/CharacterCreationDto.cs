@@ -9,15 +9,16 @@ namespace StarWars.Data.Models.Creatures.Character
     public class CharacterCreationDto
     {
         [Required(ErrorMessage = "You should fill out a Name")]
-        [MaxLength(50, ErrorMessage = "The title shouldn't have more than 50 characters")]
+        [MaxLength(50, ErrorMessage = "The Name shouldn't have more than 50 characters")]
         public string Name { get; set; }
 
-        [MaxLength(50, ErrorMessage = "The title shouldn't have more than 50 characters")]
+        [MaxLength(50, ErrorMessage = "The FamilyName shouldn't have more than 50 characters")]
         public string FamilyName { get; set; }
 
-        [MaxLength(50, ErrorMessage = "The title shouldn't have more than 50 characters")]
+        [MaxLength(50, ErrorMessage = "The GivenName shouldn't have more than 50 characters")]
         public string GivenName { get; set; }
 
-        public SpeciesCreationDto Species { get; set; }
+        [MaxLength(50, ErrorMessage = "The SpeciesName shouldn't have more than 50 characters")]
+        public string SpeciesName { get; set; }
     }
 }

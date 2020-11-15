@@ -28,6 +28,18 @@ namespace StarWars.Data.Services
             _context.Characters.Add(character);
         }
 
+        public void AddSpecies(Species species)
+        {
+            if (species == null)
+            {
+                throw new ArgumentNullException(nameof(species));
+            }
+
+            species.Id = new Guid();
+
+            _context.Species.Add(species);
+        }
+
         public bool CharacterExist(Guid characterId)
         {
             if (characterId == Guid.Empty)
@@ -48,9 +60,46 @@ namespace StarWars.Data.Services
             return _context.Characters.FirstOrDefault(c => c.Id == characterId);
         }
 
+        public Species GetSpecies(string speciesName)
+        {
+            if (speciesName == null)
+            {
+                throw new ArgumentNullException(nameof(speciesName));
+            }
+
+            return _context.Species.FirstOrDefault(s => s.Name == speciesName);
+        }
+
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
+        }
+
+        public Species GetNullSpecies()
+        {
+            if (!_context.Species.Any(s => s.Id == Guid.Empty))
+            {
+                var tempSpecies = new Species
+                { 
+                    Id = Guid.Empty,
+                    Name = String.Empty
+                };                
+                
+                _context.Species.Add(tempSpecies);
+                Save();
+            }
+
+            return _context.Species.FirstOrDefault();
+        }
+
+        public bool SpeciesExist(string speciesName)
+        {            
+            if (speciesName == null)
+            {
+                throw new ArgumentNullException(nameof(speciesName));
+            }
+
+            return _context.Species.Any(s => s.Name == speciesName);
         }
     }
 }

@@ -24,10 +24,25 @@ namespace DatabaseHandler.Controllers
         [HttpPost(Name = "CreateCharacter")]
         public ActionResult<CharacterDto> CreateCharacter(CharacterCreationDto character)
         {
+            Species tempSpecies = _starWarsRepository.GetNullSpecies();
+            if(character.SpeciesName != null)
+            {
+                if (!_starWarsRepository.SpeciesExist(character.Name))
+                {
+                    var species = new Species { Name = character.SpeciesName };
+                    _starWarsRepository.AddSpecies(species);
+                    _starWarsRepository.Save(); //?
+                }
+                
+                tempSpecies = _starWarsRepository.GetSpecies(character.SpeciesName);
+            }
+
             var tempCharacter = new Character {
                 Name = character.Name,
                 FamilyName = character.FamilyName,
                 GivenName = character.GivenName,
+                Species = tempSpecies,
+                SpeciesId = tempSpecies.Id
             };
 
             _starWarsRepository.AddCharacter(tempCharacter);
@@ -38,7 +53,8 @@ namespace DatabaseHandler.Controllers
                 Id = tempCharacter.Id,
                 Name = tempCharacter.Name,
                 FamilyName = tempCharacter.FamilyName,
-                GivenName = tempCharacter.GivenName
+                GivenName = tempCharacter.GivenName,
+                SpeciesName = tempCharacter.Species.Name
             };
 
             return CreatedAtRoute("GetCharacter",
