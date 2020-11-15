@@ -2,6 +2,7 @@
 using StarWars.Data.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace StarWars.Data.Services
@@ -25,6 +26,26 @@ namespace StarWars.Data.Services
             character.Id = new Guid();
 
             _context.Characters.Add(character);
+        }
+
+        public bool CharacterExist(Guid characterId)
+        {
+            if (characterId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(characterId));
+            }
+
+            return _context.Characters.Any(c => c.Id == characterId);
+        }
+
+        public Character GetCharacter(Guid characterId)
+        {
+            if (characterId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(characterId));
+            }
+
+            return _context.Characters.FirstOrDefault(c => c.Id == characterId);
         }
     }
 }

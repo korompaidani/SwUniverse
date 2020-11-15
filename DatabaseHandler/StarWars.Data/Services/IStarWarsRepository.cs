@@ -5,8 +5,12 @@ using System.Text;
 
 namespace StarWars.Data.Services
 {
-    interface IStarWarsRepository
+    public interface IStarWarsRepository
     {
         void AddCharacter(Character character);
+
+        Character GetCharacter(Guid characterId);
+
+        bool CharacterExist(Guid characterId);
     }
 }

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using StarWars.Data;
 using StarWars.Data.DbContexts;
+using StarWars.Data.Services;
 
 namespace DatabaseHandler
 {
@@ -30,9 +31,19 @@ namespace DatabaseHandler
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
+            services.AddControllers(setupAction =>
+            {
+                setupAction.ReturnHttpNotAcceptable = true;
+                setupAction.CacheProfiles.Add("240SecondsCacheProfile",
+                    new CacheProfile()
+                    {
+                        Duration = 240
+                    });
+            });
+
             services.AddDbContext<SwContext>(options 
                 => options.UseSqlServer(Configuration.GetConnectionString("StarWarsUniverse")));
+            services.AddScoped<IStarWarsRepository, StarWarsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
