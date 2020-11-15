@@ -12,5 +12,8 @@ namespace StarWars.Data.DbContexts
         public DbSet<Character> Characters { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<LifeTime> Lifetimes { get; set; }
+        public DbSet<Species> Species { get; set; }
+        public DbSet<Planet> Planets { get; set; }
+        public DbSet<PlanetDescription> PlanetDescriptions { get; set; }
     }
 }

@@ -24,5 +24,6 @@ namespace StarWars.Data.Entities
         public string Geography { get; set; }
 
         public ICollection<Species> NativeSpecies { get; set; }
+            = new List<Species>();
     }
 }
