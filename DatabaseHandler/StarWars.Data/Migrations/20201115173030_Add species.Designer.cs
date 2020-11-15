@@ -10,8 +10,8 @@ using StarWars.Data.DbContexts;
 namespace StarWars.Data.Migrations
 {
     [DbContext(typeof(SwContext))]
-    [Migration("20201115131856_existing tables are fixed")]
-    partial class existingtablesarefixed
+    [Migration("20201115173030_Add species")]
+    partial class Addspecies
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

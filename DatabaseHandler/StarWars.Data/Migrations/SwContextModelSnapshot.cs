@@ -38,7 +38,12 @@ namespace StarWars.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid>("SpeciesId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SpeciesId");
 
                     b.ToTable("Characters");
                 });
@@ -140,6 +145,17 @@ namespace StarWars.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Species");
+                });
+
+            modelBuilder.Entity("StarWars.Data.Entities.Character", b =>
+                {
+                    b.HasOne("StarWars.Data.Entities.Species", "Species")
+                        .WithMany()
+                        .HasForeignKey("SpeciesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Species");
                 });
 
             modelBuilder.Entity("StarWars.Data.Entities.Planet", b =>

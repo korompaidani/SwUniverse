@@ -10,8 +10,8 @@ using StarWars.Data.DbContexts;
 namespace StarWars.Data.Migrations
 {
     [DbContext(typeof(SwContext))]
-    [Migration("20201115103142_fix at ICollections")]
-    partial class fixatICollections
+    [Migration("20201115172649_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,12 +40,7 @@ namespace StarWars.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("SpeciesId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SpeciesId");
 
                     b.ToTable("Characters");
                 });
@@ -131,33 +126,6 @@ namespace StarWars.Data.Migrations
                     b.HasIndex("PlanetId");
 
                     b.ToTable("PlanetDescriptions");
-                });
-
-            modelBuilder.Entity("StarWars.Data.Entities.Species", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Species");
-                });
-
-            modelBuilder.Entity("StarWars.Data.Entities.Character", b =>
-                {
-                    b.HasOne("StarWars.Data.Entities.Species", "Species")
-                        .WithMany()
-                        .HasForeignKey("SpeciesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Species");
                 });
 
             modelBuilder.Entity("StarWars.Data.Entities.Planet", b =>
