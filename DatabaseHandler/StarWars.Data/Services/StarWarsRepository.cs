@@ -80,7 +80,7 @@ namespace StarWars.Data.Services
             return (_context.SaveChanges() >= 0);
         }
 
-        public Species GetNullSpecies()
+        public Species GetDefaultSpecies()
         {
             var controlGuid = new Guid(DefaultNullGuidValue);
             Species tempSpecies = null;

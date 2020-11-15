@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StarWars.Data.Entities;
 using StarWars.Data.Models.Creatures.Character;
@@ -14,17 +15,21 @@ namespace DatabaseHandler.Controllers
     public class CharacterController : ControllerBase
     {
         private readonly IStarWarsRepository _starWarsRepository;
+        private readonly IMapper _mapper;
 
-        public CharacterController(IStarWarsRepository starWarsRepository)
+        public CharacterController(IStarWarsRepository starWarsRepository, IMapper mapper)
         {
             _starWarsRepository = starWarsRepository ??
                 throw new ArgumentNullException(nameof(starWarsRepository));
+            
+            _mapper = mapper ??
+               throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpPost(Name = "CreateCharacter")]
         public ActionResult<CharacterDto> CreateCharacter(CharacterCreationDto character)
         {
-            Species tempSpecies = _starWarsRepository.GetNullSpecies();
+            Species tempSpecies = _starWarsRepository.GetDefaultSpecies();
             if(character.SpeciesName != null)
             {
                 if (!_starWarsRepository.SpeciesExist(character.Name))
@@ -37,29 +42,16 @@ namespace DatabaseHandler.Controllers
                 tempSpecies = _starWarsRepository.GetSpecies(character.SpeciesName);
             }
 
-            var tempCharacter = new Character {
-                Name = character.Name,
-                FamilyName = character.FamilyName,
-                GivenName = character.GivenName,
-                Species = tempSpecies,
-                SpeciesId = tempSpecies.Id
-            };
-
+            var tempCharacter = _mapper.Map<Character>(character);
+            tempCharacter.Species = tempSpecies;
+            tempCharacter.SpeciesId = tempSpecies.Id;
+            
             _starWarsRepository.AddCharacter(tempCharacter);
             _starWarsRepository.Save();
 
-            var resultCharacterDto = new CharacterDto
-            {
-                Id = tempCharacter.Id,
-                Name = tempCharacter.Name,
-                FamilyName = tempCharacter.FamilyName,
-                GivenName = tempCharacter.GivenName,
-                SpeciesName = tempCharacter.Species.Name
-            };
-
             return CreatedAtRoute("GetCharacter",
                            new { characterId = tempCharacter.Id },
-                           resultCharacterDto);
+                           _mapper.Map<CharacterDto>(tempCharacter));
         }
 
         [HttpGet("{characterId}", Name = "GetCharacter")]
@@ -73,15 +65,7 @@ namespace DatabaseHandler.Controllers
                 return NotFound();
             }
 
-            var resultCharacterDto = new CharacterDto
-            {
-                Id = characterFromRepo.Id,
-                Name = characterFromRepo.Name,
-                FamilyName = characterFromRepo.Name,
-                GivenName = characterFromRepo.Name
-            };
-
-            return Ok(resultCharacterDto);
+            return Ok(_mapper.Map<CharacterDto>(characterFromRepo));
         }
     }
 }

@@ -1,9 +1,8 @@
-//https://onedrive.live.com/?cid=516D78952A773E9A&id=516D78952A773E9A%21655967&parId=516D78952A773E9A%21650488&o=OneUp 21:40
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,6 +42,9 @@ namespace DatabaseHandler
 
             services.AddDbContext<SwContext>(options 
                 => options.UseSqlServer(Configuration.GetConnectionString("StarWarsUniverse")));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<IStarWarsRepository, StarWarsRepository>();
         }
 

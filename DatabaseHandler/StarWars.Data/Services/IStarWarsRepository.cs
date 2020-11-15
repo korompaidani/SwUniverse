@@ -19,7 +19,7 @@ namespace StarWars.Data.Services
 
         Species GetSpecies(string speciesName);
 
-        Species GetNullSpecies();
+        Species GetDefaultSpecies();
 
         bool Save();
     }
