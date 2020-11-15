@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace StarWars.Data.Models
 {
+    [Keyless]
     public class SwLifeTime
     {
         public virtual SwCharacter Id { get; set; }

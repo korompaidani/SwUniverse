@@ -1,0 +1,3 @@
+﻿In Package Manager Console
+add-migration "Initial migration"
+update-database
