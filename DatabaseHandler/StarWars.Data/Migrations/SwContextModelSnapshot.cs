@@ -8,7 +8,7 @@ using StarWars.Data;
 
 namespace StarWars.Data.Migrations
 {
-    [DbContext(typeof(SwContext))]
+    [DbContext(typeof(DbContexts.SwContext))]
     partial class SwContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
