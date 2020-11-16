@@ -32,7 +32,7 @@ namespace DatabaseHandler.Controllers
             Species tempSpecies = _starWarsRepository.GetDefaultSpecies();
             if(character.SpeciesName != null)
             {
-                if (!_starWarsRepository.SpeciesExist(character.Name))
+                if (!_starWarsRepository.SpeciesExist(character.SpeciesName))
                 {
                     var species = new Species { Name = character.SpeciesName };
                     _starWarsRepository.AddSpecies(species);

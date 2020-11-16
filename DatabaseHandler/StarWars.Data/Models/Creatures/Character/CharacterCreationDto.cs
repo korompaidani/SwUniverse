@@ -20,5 +20,9 @@ namespace StarWars.Data.Models.Creatures.Character
 
         [MaxLength(50, ErrorMessage = "The SpeciesName shouldn't have more than 50 characters")]
         public string SpeciesName { get; set; }
+
+        public int BeginDate { get; set; }
+
+        public int EndDate { get; set; }
     }
 }
