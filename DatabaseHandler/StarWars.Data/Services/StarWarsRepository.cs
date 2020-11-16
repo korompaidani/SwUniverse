@@ -104,5 +104,15 @@ namespace StarWars.Data.Services
 
             return _context.Species.Any(s => s.Name == speciesName);
         }
+
+        public bool CharacterExist(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return _context.Characters.Any(c => c.Name == name);
+        }
     }
 }

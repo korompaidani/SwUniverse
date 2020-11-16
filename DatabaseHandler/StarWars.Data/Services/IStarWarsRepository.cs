@@ -13,6 +13,8 @@ namespace StarWars.Data.Services
 
         bool CharacterExist(Guid characterId);
 
+        bool CharacterExist(string name);
+
         bool SpeciesExist(string speciesName);
 
         void AddSpecies(Species species);
