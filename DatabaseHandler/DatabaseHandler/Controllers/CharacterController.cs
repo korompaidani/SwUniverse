@@ -29,6 +29,8 @@ namespace DatabaseHandler.Controllers
         [HttpPost(Name = "CreateCharacter")]
         public ActionResult<CharacterDto> CreateCharacter(CharacterCreationDto character)
         {
+            _starWarsRepository.AddFakePlanet();
+
             if (_starWarsRepository.CharacterExist(character.Name))
             {
                 return Conflict($"The character {character.Name} is already exist");

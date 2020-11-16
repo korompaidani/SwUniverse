@@ -6,9 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StarWars.Data.Entities
 {
-    [Keyless]
     public class PlanetDescription
     {
+        [Key]
+        public Guid Id { get; set; }
+
         [ForeignKey("PlanetId")]
         public Planet Planet { get; set; }
 
@@ -20,6 +22,8 @@ namespace StarWars.Data.Entities
         public string Description { get; set; }
 
         public string History { get; set; }
+
+        public string FloraAndFauna { get; set; }
 
         public string Geography { get; set; }
 

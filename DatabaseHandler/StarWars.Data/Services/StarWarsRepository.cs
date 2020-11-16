@@ -114,5 +114,41 @@ namespace StarWars.Data.Services
 
             return _context.Characters.Any(c => c.Name == name);
         }
+
+        public void AddFakePlanet()
+        {
+            var planet = new Planet
+            {
+                Id = new Guid("{873957db-073e-47ce-ceef-08d88a6349b9}"),
+                Name = "Planet 2",
+                Shape = Common.PlanetShape.Sphere,
+                Moons = new List<Planet>
+                {
+                    new Planet{Id = new Guid(), Name = "m1"},
+                    new Planet{Id = new Guid(), Name = "m2"}
+                }
+            };
+
+            var planetDescription = new PlanetDescription
+            {
+                Planet = planet,
+                PlanetId = new Guid("{873957db-073e-47ce-ceef-08d88a6349b9}"),
+                ShortDescription = "Short",
+                Description = "Full desc",
+                NativeSpecies = new List<Species>
+                {
+                    new Species { Name = "Specc1" },
+                    new Species { Name = "s2" },
+                    new Species { Name = "3" },
+                    new Species { Name = "4" }
+                }
+            };
+
+            //_context.Planets.Add(planet);
+            //Save();
+
+            _context.PlanetDescriptions.Add(planetDescription);
+            Save();
+        }
     }
 }

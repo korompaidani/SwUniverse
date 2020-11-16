@@ -23,6 +23,8 @@ namespace StarWars.Data.Services
 
         Species GetDefaultSpecies();
 
+        void AddFakePlanet();
+
         bool Save();
     }
 }
