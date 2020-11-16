@@ -119,7 +119,7 @@ namespace StarWars.Data.Services
         {
             var planet = new Planet
             {
-                Id = new Guid("{873957db-073e-47ce-ceef-08d88a6349b9}"),
+                Id = new Guid(),
                 Name = "Planet 2",
                 Shape = Common.PlanetShape.Sphere,
                 Moons = new List<Planet>
@@ -129,24 +129,25 @@ namespace StarWars.Data.Services
                 }
             };
 
+            //var queriedPlanet = _context.Planets.FirstOrDefault();
+
             var planetDescription = new PlanetDescription
             {
+                Id = new Guid(),
                 Planet = planet,
-                PlanetId = new Guid("{873957db-073e-47ce-ceef-08d88a6349b9}"),
+                PlanetId = planet.Id,
                 ShortDescription = "Short",
                 Description = "Full desc",
                 NativeSpecies = new List<Species>
                 {
-                    new Species { Name = "Specc1" },
-                    new Species { Name = "s2" },
-                    new Species { Name = "3" },
-                    new Species { Name = "4" }
+                    new Species { Name = "a" },
+                    new Species { Name = "b" }
                 }
             };
 
             //_context.Planets.Add(planet);
             //Save();
-
+            _context.Planets.Add(planet);
             _context.PlanetDescriptions.Add(planetDescription);
             Save();
         }
