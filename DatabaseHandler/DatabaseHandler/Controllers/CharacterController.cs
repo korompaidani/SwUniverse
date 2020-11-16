@@ -29,7 +29,7 @@ namespace DatabaseHandler.Controllers
         [HttpPost(Name = "CreateCharacter")]
         public ActionResult<CharacterDto> CreateCharacter(CharacterCreationDto character)
         {
-            _starWarsRepository.AddFakePlanet();
+            _starWarsRepository.DoFakeStaffs();
 
             if (_starWarsRepository.CharacterExist(character.Name))
             {
