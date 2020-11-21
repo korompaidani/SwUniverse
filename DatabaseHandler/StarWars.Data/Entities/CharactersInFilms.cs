@@ -5,9 +5,12 @@ using System.Text;
 
 namespace StarWars.Data.Entities
 {
-    public class Film
+    public class CharactersInFilms
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid CharacterId { get; set; }
+
+        [Key]
+        public Guid FilmId { get; set; }
     }
 }

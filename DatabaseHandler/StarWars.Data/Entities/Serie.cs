@@ -9,7 +9,5 @@ namespace StarWars.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public ICollection<Character> Character { get; set; }
-            = new List<Character>();
     }
 }
