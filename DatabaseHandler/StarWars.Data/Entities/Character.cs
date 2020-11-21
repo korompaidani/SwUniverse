@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,5 +24,8 @@ namespace StarWars.Data.Entities
         public Species Species { get; set; }
 
         public string SpeciesName { get; set; }
+
+        public ICollection<Society> MemberOf { get; set; }
+            = new List<Society>();
     }
 }
