@@ -7,10 +7,10 @@ namespace StarWars.Data.Entities
 {
     public class CharactersInSeries
     {
-        [Key]
         public Guid CharacterId { get; set; }
+        public Character Character { get; set; }
 
-        [Key]
         public Guid SerieId { get; set; }
+        public Series Series { get; set; }
     }
 }

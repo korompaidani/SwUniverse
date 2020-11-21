@@ -5,9 +5,11 @@ using System.Text;
 
 namespace StarWars.Data.Entities
 {
-    public class Serie
+    public class Series
     {
         [Key]
         public Guid Id { get; set; }
+
+        public ICollection<CharactersInSeries> CharactersInSeries { get; set; }
     }
 }

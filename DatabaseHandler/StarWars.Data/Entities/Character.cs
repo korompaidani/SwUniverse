@@ -27,5 +27,9 @@ namespace StarWars.Data.Entities
 
         public ICollection<Society> MemberOf { get; set; }
             = new List<Society>();
+
+        public ICollection<CharactersInFilms> CharactersInFilms { get; set; }
+
+        public ICollection<CharactersInSeries> CharactersInSeries { get; set; }
     }
 }
