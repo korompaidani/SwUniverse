@@ -9,6 +9,12 @@ namespace StarWars.Data.DbContexts
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CharactersInFilms>().HasKey(cf => new { cf.CharacterId, cf.FilmId });
+            modelBuilder.Entity<CharactersInSeries>().HasKey(cf => new { cf.CharacterId, cf.SeriesId });
+        }
+
         public DbSet<Character> Characters { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<LifeTime> Lifetimes { get; set; }
@@ -16,5 +22,8 @@ namespace StarWars.Data.DbContexts
         public DbSet<Planet> Planets { get; set; }
         public DbSet<Society> Societies { get; set; }
         public DbSet<PlanetDescription> PlanetDescriptions { get; set; }
+        public DbSet<CharactersInFilms> CharactersInFilms { get; set; }
+        public DbSet<CharactersInSeries> CharactersInSeries { get; set; }
+
     }
 }
