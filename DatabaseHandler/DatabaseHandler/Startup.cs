@@ -14,7 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using StarWars.Data;
 using StarWars.Data.DbContexts;
-using StarWars.Data.Services;
+using StarWars.Data.Repositories;
 
 namespace DatabaseHandler
 {
@@ -45,7 +45,7 @@ namespace DatabaseHandler
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<IStarWarsRepository, StarWarsRepository>();
+            services.AddScoped<ICharacterRepository, CharacterRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

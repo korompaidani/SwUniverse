@@ -13,8 +13,9 @@ namespace StarWars.Data.Profiles
         public CharactersProfile()
         {
             CreateMap<Models.Creatures.Character.CharacterCreationModel, Entities.Character>();
-            CreateMap<Entities.Character, Models.Creatures.Character.CharacterModel>();
-            CreateMap<Entities.LifeTime, Models.Creatures.Character.CharacterModel>()
+            CreateMap<Entities.Character, Models.Creatures.Character.CharacterOutputModel>();
+            CreateMap<Models.Creatures.Character.CharacterCreationModel, Models.Creatures.Character.CharacterOutputModel>();
+            CreateMap<Entities.LifeTime, Models.Creatures.Character.CharacterOutputModel>()
                 .ForMember(charDto => charDto.FullFormOfAge, m => m.MapFrom(lifeTime => CreateFullFormFromAge(lifeTime.BeginDate, lifeTime.EndDate)));
 
             // Consider how can this solution help on the species related problem which is handled in the controller

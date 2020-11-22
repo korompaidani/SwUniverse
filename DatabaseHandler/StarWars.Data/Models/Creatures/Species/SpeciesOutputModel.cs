@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StarWars.Data.Models.Creatures.Species
 {
-    public class SpeciesModel
+    public class SpeciesOutputModel
     {
         public string Name { get; set; }
     }

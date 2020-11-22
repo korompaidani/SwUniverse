@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StarWars.Data.Entities;
 using StarWars.Data.Models.Creatures.Character;
+using StarWars.Data.Repositories;
 using StarWars.Data.Services;
 
 namespace DatabaseHandler.Controllers
@@ -14,65 +15,41 @@ namespace DatabaseHandler.Controllers
     [Route("api/characters")]
     public class CharacterController : ControllerBase
     {
-        private readonly IStarWarsRepository _starWarsRepository;
-        private readonly IMapper _mapper;
+        private readonly ICharacterService _characterService;
 
-        public CharacterController(IStarWarsRepository starWarsRepository, IMapper mapper)
+        public CharacterController(ICharacterService characterService)
         {
-            _starWarsRepository = starWarsRepository ??
-                throw new ArgumentNullException(nameof(starWarsRepository));
-            
-            _mapper = mapper ??
-               throw new ArgumentNullException(nameof(mapper));
+            _characterService = characterService ??
+                throw new ArgumentNullException(nameof(characterService));
         }
 
         [HttpPost(Name = "CreateCharacter")]
-        public ActionResult<CharacterModel> CreateCharacter(CharacterCreationModel character)
+        public ActionResult<CharacterOutputModel> CreateCharacter(CharacterCreationModel character)
         {
-            _starWarsRepository.DoFakeStaffs();
-
-            if (_starWarsRepository.CharacterExist(character.Name))
+            if (_characterService.IsCharacterAlreadyExist(character))
             {
                 return Conflict($"The character {character.Name} is already exist");
             }
 
-            Species tempSpecies = _starWarsRepository.GetDefaultSpecies();
-            if(character.SpeciesName != null)
-            {
-                if (!_starWarsRepository.SpeciesExist(character.SpeciesName))
-                {
-                    var species = new Species { Name = character.SpeciesName };
-                    _starWarsRepository.AddSpecies(species);
-                    _starWarsRepository.Save();
-                }
-                
-                tempSpecies = _starWarsRepository.GetSpecies(character.SpeciesName);
-            }
-
-            var tempCharacter = _mapper.Map<Character>(character);
-            tempCharacter.Species = tempSpecies;
-            tempCharacter.SpeciesName = tempSpecies.Name;
-            
-            _starWarsRepository.AddCharacter(tempCharacter);
-            _starWarsRepository.Save();
+            var returnCharacter = _characterService.CreateCharacter(character);
 
             return CreatedAtRoute("GetCharacter",
-                           new { characterId = tempCharacter.Id },
-                           _mapper.Map<CharacterModel>(tempCharacter));
+                           new { characterId = returnCharacter.Id },
+                           returnCharacter);
         }
 
         [HttpGet("{characterId}", Name = "GetCharacter")]
         [ResponseCache(Duration = 120)]
-        public ActionResult<CharacterModel> GetCharacter(Guid characterId)
+        public ActionResult<CharacterOutputModel> GetCharacter(Guid characterId)
         {
-            var characterFromRepo = _starWarsRepository.GetCharacter(characterId);
+            var returnCharacter = _characterService.GetCharacter(characterId);
 
-            if (characterFromRepo == null)
+            if (returnCharacter == null)
             {
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<CharacterModel>(characterFromRepo));
+            return Ok(returnCharacter);
         }
     }
 }
