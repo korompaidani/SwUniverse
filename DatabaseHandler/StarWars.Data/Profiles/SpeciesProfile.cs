@@ -9,8 +9,8 @@ namespace StarWars.Data.Profiles
     {
         public SpeciesProfile()
         {
-            CreateMap<Models.Creatures.Species.SpeciesCreationDto, Entities.Species>();
-            CreateMap<Entities.Species, Models.Creatures.Species.SpeciesDto>();
+            CreateMap<Models.Creatures.Species.SpeciesCreationModel, Entities.Species>();
+            CreateMap<Entities.Species, Models.Creatures.Species.SpeciesModel>();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarWars.Data.Models.Creatures.Character
 {
-    public class CharacterCreationDto
+    public class CharacterCreationModel
     {
         [Required(ErrorMessage = "You should fill out a Name")]
         [MaxLength(50, ErrorMessage = "The Name shouldn't have more than 50 characters")]

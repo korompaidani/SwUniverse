@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StarWars.Data.Models.Creatures.Character
 {
-    public class CharacterDto
+    public class CharacterModel
     {
         public Guid Id { get; set; }
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StarWars.Data.Models.Creatures.Species
 {
-    public class SpeciesDto
+    public class SpeciesModel
     {
         public string Name { get; set; }
     }

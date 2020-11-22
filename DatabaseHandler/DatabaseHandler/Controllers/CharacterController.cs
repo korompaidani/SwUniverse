@@ -27,7 +27,7 @@ namespace DatabaseHandler.Controllers
         }
 
         [HttpPost(Name = "CreateCharacter")]
-        public ActionResult<CharacterDto> CreateCharacter(CharacterCreationDto character)
+        public ActionResult<CharacterModel> CreateCharacter(CharacterCreationModel character)
         {
             _starWarsRepository.DoFakeStaffs();
 
@@ -58,12 +58,12 @@ namespace DatabaseHandler.Controllers
 
             return CreatedAtRoute("GetCharacter",
                            new { characterId = tempCharacter.Id },
-                           _mapper.Map<CharacterDto>(tempCharacter));
+                           _mapper.Map<CharacterModel>(tempCharacter));
         }
 
         [HttpGet("{characterId}", Name = "GetCharacter")]
         [ResponseCache(Duration = 120)]
-        public ActionResult<CharacterDto> GetCharacter(Guid characterId)
+        public ActionResult<CharacterModel> GetCharacter(Guid characterId)
         {
             var characterFromRepo = _starWarsRepository.GetCharacter(characterId);
 
@@ -72,7 +72,7 @@ namespace DatabaseHandler.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<CharacterDto>(characterFromRepo));
+            return Ok(_mapper.Map<CharacterModel>(characterFromRepo));
         }
     }
 }
