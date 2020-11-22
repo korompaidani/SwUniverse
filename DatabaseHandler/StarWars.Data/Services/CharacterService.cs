@@ -28,11 +28,9 @@ namespace StarWars.Data.Services
 
         public CharacterOutputModel CreateCharacter(CharacterCreationModel character)
         {
+            var tempSpecies = character.IsSpeciesKindSet ? _speciesService.GetOrCreateSpecies(character.SpeciesName) : _speciesService.GetDefaultSpecies();
             var tempCharacter = _mapper.Map<Character>(character);
-            tempCharacter.Species = _mapper.Map<Species>(
-                character.IsSpeciesKindSet 
-                ? _speciesService.GetOrCreateSpecies(character.Name) : _speciesService.GetDefaultSpecies());
-            tempCharacter.SpeciesName = tempCharacter.Species.Name;
+            tempCharacter.SpeciesName = tempSpecies.Name;
 
             _characterRepository.CreateCharacter(tempCharacter);
 
