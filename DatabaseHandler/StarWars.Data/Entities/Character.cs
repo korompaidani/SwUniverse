@@ -25,6 +25,11 @@ namespace StarWars.Data.Entities
 
         public string SpeciesName { get; set; }
 
+        [ForeignKey("LifeTimeId")]
+        public LifeTime LifeTime { get; set; }
+
+        public Guid LifeTimeId { get; set; }
+
         public ICollection<Society> MemberOf { get; set; }
             = new List<Society>();
 

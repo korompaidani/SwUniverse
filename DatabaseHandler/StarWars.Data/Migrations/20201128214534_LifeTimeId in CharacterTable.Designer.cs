@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarWars.Data.DbContexts;
 
 namespace StarWars.Data.Migrations
 {
     [DbContext(typeof(SwContext))]
-    partial class SwContextModelSnapshot : ModelSnapshot
+    [Migration("20201128214534_LifeTimeId in CharacterTable")]
+    partial class LifeTimeIdinCharacterTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
