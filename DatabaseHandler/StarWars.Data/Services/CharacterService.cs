@@ -40,9 +40,10 @@ namespace StarWars.Data.Services
 
         public CharacterOutputModel CreateCharacter(CharacterCreationModel character)
         {
-            var tempSpecies = character.IsSpeciesKindSet ? _speciesService.GetOrCreateSpecies(character.SpeciesName) : _speciesService.GetDefaultSpecies();
             var tempCharacter = _mapper.Map<Character>(character);
-            tempCharacter.SpeciesName = tempSpecies.Name;
+
+            AddSpeciesToCharacterIfSet(character, ref tempCharacter);
+            AddSocietiesToCharacterIfSet(character, ref tempCharacter);
 
             _characterRepository.CreateCharacter(tempCharacter);
 
@@ -57,6 +58,23 @@ namespace StarWars.Data.Services
         public bool IsCharacterAlreadyExist(CharacterCreationModel character)
         {
             return _characterRepository.IsCharacterExist(character.Name);
+        }
+
+        private void AddSpeciesToCharacterIfSet(CharacterCreationModel character, ref Character outCharacter)
+        {
+            var tempSpecies = character.IsSpeciesKindSet ? _speciesService.GetOrCreateSpecies(character.SpeciesName) : _speciesService.GetDefaultSpecies();
+            outCharacter.SpeciesName = tempSpecies.Name;
+        }
+
+        private void AddSocietiesToCharacterIfSet(CharacterCreationModel character, ref Character outCharacter)
+        {
+            if (character.IsMemberOfSet)
+            {
+                foreach (var society in character.MemberOf)
+                {
+                    _societyService.GetOrCreateSociety(society.Name);
+                }
+            }
         }
     }
 }
