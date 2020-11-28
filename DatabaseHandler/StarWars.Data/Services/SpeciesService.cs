@@ -20,12 +20,16 @@ namespace StarWars.Data.Services
                throw new ArgumentNullException(nameof(mapper));
         }
 
-        public SpeciesOutputModel CreateSpecies(SpeciesCreationModel character)
+        public SpeciesOutputModel CreateSpecies(SpeciesCreationModel species)
         {
-            throw new NotImplementedException();
+            var tempSpecies = _mapper.Map<Species>(species);
+
+            _speciesRepository.CreateSpecies(tempSpecies);
+
+            return _mapper.Map<SpeciesOutputModel>(tempSpecies);
         }
 
-        public bool IsSpeciesAlreadyExist(SpeciesCreationModel character)
+        public bool IsSpeciesAlreadyExist(SpeciesCreationModel species)
         {
             throw new NotImplementedException();
         }

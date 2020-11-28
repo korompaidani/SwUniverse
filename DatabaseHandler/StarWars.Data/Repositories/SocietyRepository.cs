@@ -46,14 +46,14 @@ namespace StarWars.Data.Repositories
             return _context.Society.FirstOrDefault(s => s.Name == societyName);
         }
 
-        public bool IsSocietyExist(Guid societyId)
+        public bool IsSocietyExist(string societyName)
         {
-            if (societyId == null)
+            if (societyName == null)
             {
-                throw new ArgumentNullException(nameof(societyId));
+                throw new ArgumentNullException(nameof(societyName));
             }
 
-            return _context.Society.Any(s => s.Id == societyId);
+            return _context.Society.Any(s => s.Name == societyName);
         }
 
         public bool SaveChanges()

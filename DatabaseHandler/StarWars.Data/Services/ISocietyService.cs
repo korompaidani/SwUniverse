@@ -9,6 +9,6 @@ namespace StarWars.Data.Services
         bool IsSocietyAlreadyExist(SocietyCreationModel society);
         SocietyOutputModel GetSociety(string societyName);
         SocietyOutputModel GetSociety(Guid societyId);
-        SocietyOutputModel GetOrCreateSociety(string speciesName);
+        SocietyOutputModel GetOrCreateSociety(string societyName);
     }
 }

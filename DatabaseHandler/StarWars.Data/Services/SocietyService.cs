@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StarWars.Data.Entities;
 using StarWars.Data.Models.Creatures.Society;
 using StarWars.Data.Repositories;
 using System;
@@ -21,27 +22,36 @@ namespace StarWars.Data.Services
 
         public SocietyOutputModel CreateSociety(SocietyCreationModel society)
         {
-            throw new NotImplementedException();
+            var tempSociety = _mapper.Map<Society>(society);
+
+            _societyRepository.CreateSociety(tempSociety);
+
+            return _mapper.Map<SocietyOutputModel>(tempSociety);
         }
 
-        public SocietyOutputModel GetOrCreateSociety(string speciesName)
+        public SocietyOutputModel GetOrCreateSociety(string societyName)
         {
-            throw new NotImplementedException();
+            if (!_societyRepository.IsSocietyExist(societyName))
+            {
+                _societyRepository.CreateSociety(new Society { Name = societyName });
+            }
+
+            return _mapper.Map<SocietyOutputModel>(_societyRepository.GetSociety(societyName));
         }
 
         public SocietyOutputModel GetSociety(string societyName)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<SocietyOutputModel>(_societyRepository.GetSociety(societyName));
         }
 
         public SocietyOutputModel GetSociety(Guid societyId)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<SocietyOutputModel>(_societyRepository.GetSociety(societyId));
         }
 
         public bool IsSocietyAlreadyExist(SocietyCreationModel society)
         {
-            throw new NotImplementedException();
+            return _societyRepository.IsSocietyExist(society.Name);
         }
     }
 }
