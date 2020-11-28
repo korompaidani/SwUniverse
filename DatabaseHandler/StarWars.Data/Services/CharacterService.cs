@@ -43,7 +43,6 @@ namespace StarWars.Data.Services
             var tempCharacter = _mapper.Map<Character>(character);
 
             AddSpeciesToCharacterIfSet(character, ref tempCharacter);
-            AddSocietiesToCharacterIfSet(character, ref tempCharacter);
 
             _characterRepository.CreateCharacter(tempCharacter);
 
@@ -64,17 +63,6 @@ namespace StarWars.Data.Services
         {
             var tempSpecies = character.IsSpeciesKindSet ? _speciesService.GetOrCreateSpecies(character.SpeciesName) : _speciesService.GetDefaultSpecies();
             outCharacter.SpeciesName = tempSpecies.Name;
-        }
-
-        private void AddSocietiesToCharacterIfSet(CharacterCreationModel character, ref Character outCharacter)
-        {
-            if (character.IsMemberOfSet)
-            {
-                foreach (var society in character.MemberOf)
-                {
-                    _societyService.GetOrCreateSociety(society.Name);
-                }
-            }
         }
     }
 }

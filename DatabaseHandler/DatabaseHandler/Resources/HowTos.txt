@@ -1,3 +1,16 @@
 ﻿In Package Manager Console
 add-migration "Initial migration"
 update-database
+
+
+Facts:
+- If your Table(Entity) has an ICollection of an other entity (eg.: society collection in character)
+EF will create the Society table with a CharacterId foreign key and the Character wont contain anything on db side
+
+- Based on the fact above, when you are creating a character with societies (one or more) than EF will automatically fill your Societies Table as well. You dont 
+need to fill it out manually.
+
+- If you need a common table (collection table) they must contain the others keys and in context you have to call the following in OnModelCreating Method
+    modelBuilder.Entity<CharactersInFilms>().HasKey(cf => new { cf.CharacterId, cf.FilmId });
+    modelBuilder.Entity<CharactersInSeries>().HasKey(cf => new { cf.CharacterId, cf.SeriesId });
+
