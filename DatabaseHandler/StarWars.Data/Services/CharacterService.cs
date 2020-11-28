@@ -11,13 +11,27 @@ namespace StarWars.Data.Services
     public class CharacterService : ICharacterService
     {
         private readonly ISpeciesService _speciesService;
+        private readonly ISocietyService _societyService;
+        private readonly ILifeTimeService _lifeTimeService;
+
         private readonly ICharacterRepository _characterRepository;
         private readonly IMapper _mapper;
 
-        public CharacterService(ISpeciesService speciesService, ICharacterRepository characterRepository, IMapper mapper)
+        public CharacterService(
+            ISpeciesService speciesService, 
+            ISocietyService societyService, 
+            ILifeTimeService lifeTimeService, 
+            ICharacterRepository characterRepository, 
+            IMapper mapper)
         {
             _speciesService = speciesService ??
                 throw new ArgumentNullException(nameof(speciesService));
+
+            _societyService = societyService ??
+                throw new ArgumentNullException(nameof(societyService));
+
+            _lifeTimeService = lifeTimeService ??
+                throw new ArgumentNullException(nameof(lifeTimeService));
 
             _characterRepository = characterRepository ??
                 throw new ArgumentNullException(nameof(characterRepository));

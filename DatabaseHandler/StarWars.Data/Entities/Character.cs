@@ -29,7 +29,9 @@ namespace StarWars.Data.Entities
             = new List<Society>();
 
         public ICollection<CharactersInFilms> CharactersInFilms { get; set; }
+            = new List<CharactersInFilms>();
 
         public ICollection<CharactersInSeries> CharactersInSeries { get; set; }
+            = new List<CharactersInSeries>();
     }
 }

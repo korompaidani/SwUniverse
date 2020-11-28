@@ -48,8 +48,13 @@ namespace DatabaseHandler
 
             services.AddScoped<ICharacterRepository, CharacterRepository>();
             services.AddScoped<ISpeciesRepository, SpeciesRepository>();
+            services.AddScoped<ISocietyRepository, SocietyRepository>();
+            services.AddScoped<ILifeTimeRepository, LifeTimeRepository>();
+
             services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<ISpeciesService, SpeciesService>();
+            services.AddScoped<ISocietyService, SocietyService>();
+            services.AddScoped<ILifeTimeService, LifeTimeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

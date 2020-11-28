@@ -7,9 +7,6 @@ namespace StarWars.Data.Repositories
 {
     public class SpeciesRepository : ISpeciesRepository
     {
-        /// <summary>
-        /// This Guid is necessarry because Guid.Empty is overriden by EF
-        /// </summary>
         private const string DefaultSpeciesName = "Unknown";
         private readonly SwContext _context;
 

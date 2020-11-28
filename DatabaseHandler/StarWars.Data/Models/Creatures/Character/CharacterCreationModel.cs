@@ -1,8 +1,6 @@
-﻿using StarWars.Data.Models.Creatures.Species;
-using System;
+﻿using StarWars.Data.Models.Creatures.Society;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace StarWars.Data.Models.Creatures.Character
 {
@@ -19,12 +17,16 @@ namespace StarWars.Data.Models.Creatures.Character
         public string GivenName { get; set; }
 
         [MaxLength(50, ErrorMessage = "The SpeciesName shouldn't have more than 50 characters")]
-        public string SpeciesName { get; set; }        
+        public string SpeciesName { get; set; }
+
+        public IList<SocietyOutputModel> MemberOf { get; set; }
 
         public int BeginDate { get; set; }
 
         public int EndDate { get; set; }
 
         public bool IsSpeciesKindSet => SpeciesName != null ? true : false;
+
+        public bool IsMemberOfSet => MemberOf?.Count != 0 ? true : false;
     }
 }
