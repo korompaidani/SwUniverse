@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StarWars.Data.Models.Creatures.Species
+﻿namespace StarWars.Data.Models.Creatures.Species
 {
     public class SpeciesOutputModel
     {

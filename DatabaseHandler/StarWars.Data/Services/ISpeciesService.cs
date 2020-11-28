@@ -1,7 +1,4 @@
 ﻿using StarWars.Data.Models.Creatures.Species;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StarWars.Data.Services
 {

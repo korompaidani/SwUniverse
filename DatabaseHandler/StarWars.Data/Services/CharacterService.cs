@@ -3,8 +3,6 @@ using StarWars.Data.Entities;
 using StarWars.Data.Models.Creatures.Character;
 using StarWars.Data.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StarWars.Data.Services
 {
