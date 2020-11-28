@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StarWars.Data.Entities;
+using StarWars.Data.Models;
 using StarWars.Data.Models.Creatures.Character;
 using StarWars.Data.Repositories;
 using System;
@@ -43,6 +44,7 @@ namespace StarWars.Data.Services
             var tempCharacter = _mapper.Map<Character>(character);
 
             AddSpeciesToCharacterIfSet(character, ref tempCharacter);
+            AddLifeTimeToCharacterIfSet(character, ref tempCharacter);
 
             _characterRepository.CreateCharacter(tempCharacter);
 
@@ -63,6 +65,18 @@ namespace StarWars.Data.Services
         {
             var tempSpecies = character.IsSpeciesKindSet ? _speciesService.GetOrCreateSpecies(character.SpeciesName) : _speciesService.GetDefaultSpecies();
             outCharacter.SpeciesName = tempSpecies.Name;
+        }
+
+        private void AddLifeTimeToCharacterIfSet(CharacterCreationModel character, ref Character outCharacter)
+        {
+            var tempLifeTime = character.IsLifeTimeSet ? 
+                _lifeTimeService.CreateLifeTime(
+                new LifeTimeCreationModel { BeginDate = character.BirthDate, EndDate = character.DeathDate }) : null;
+
+            if(tempLifeTime != null)
+            {
+                outCharacter.LifeTimeId = tempLifeTime.Id;
+            }
         }
     }
 }

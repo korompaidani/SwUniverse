@@ -14,3 +14,5 @@ need to fill it out manually.
     modelBuilder.Entity<CharactersInFilms>().HasKey(cf => new { cf.CharacterId, cf.FilmId });
     modelBuilder.Entity<CharactersInSeries>().HasKey(cf => new { cf.CharacterId, cf.SeriesId });
 
+- Foreign key can be nullable
+

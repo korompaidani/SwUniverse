@@ -8,10 +8,10 @@ namespace StarWars.Data.Profiles
         {
             CreateMap<Models.LifeTimeCreationModel, Entities.LifeTime>();
             CreateMap<Models.LifeTimeCreationModel, Models.LifeTimeOutputModel>();
-            CreateMap<Models.LifeTimeOutputModel, Entities.Society>();
+            CreateMap<Models.LifeTimeOutputModel, Entities.LifeTime>();
             CreateMap<Models.LifeTimeOutputModel, Models.LifeTimeCreationModel>();
-            CreateMap<Entities.Society, Models.LifeTimeCreationModel>();
-            CreateMap<Entities.Society, Models.LifeTimeOutputModel>();
+            CreateMap<Entities.LifeTime, Models.LifeTimeCreationModel>();
+            CreateMap<Entities.LifeTime, Models.LifeTimeOutputModel>();
         }
     }
 }

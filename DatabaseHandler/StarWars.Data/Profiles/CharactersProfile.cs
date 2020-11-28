@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common;
 using System;
 using System.Text;
 
@@ -6,56 +7,77 @@ namespace StarWars.Data.Profiles
 {
     public class CharactersProfile : Profile
     {
-        private const string Bby = "BBY ";
-        private const string Aby = "ABY ";
-
         public CharactersProfile()
         {
-            CreateMap<Models.Creatures.Character.CharacterCreationModel, Entities.Character>();
-            CreateMap<Entities.Character, Models.Creatures.Character.CharacterOutputModel>();
+            CreateMap<Models.Creatures.Character.CharacterCreationModel, Entities.Character>();            
             CreateMap<Models.Creatures.Character.CharacterCreationModel, Models.Creatures.Character.CharacterOutputModel>();
-            CreateMap<Entities.LifeTime, Models.Creatures.Character.CharacterOutputModel>()
-                .ForMember(charDto => charDto.FullFormOfAge, m => m.MapFrom(lifeTime => CreateFullFormFromAge(lifeTime.BeginDate, lifeTime.EndDate)));
-
-            // Consider how can this solution help on the species related problem which is handled in the controller
-            //CreateMap<Models.Creatures.Character.CharacterCreationDto, Models.Creatures.Character.CharacterDto>()
-            //    .ForMember(
-            //        dest => dest.Name,
-            //        opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
-            //    .ForMember(
-            //        dest => dest.Age,
-            //        opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()));
+            CreateMap<Entities.Character, Models.Creatures.Character.CharacterOutputModel>()
+                .ForMember(charOut => charOut.FullFormOfAge, m => m.MapFrom(character => CreateFullFormFromAge(character)))
+                .ForMember(charOut => charOut.Age, m => m.MapFrom(character => CalculateAge(character)));
         }
 
-        private string CreateFullFormFromAge(int begin, int end)
+        private string CreateFullFormFromAge(Entities.Character character)
         {
-            if(begin == end)
+            if(character.LifeTime == null)
             {
                 return null;
             }
 
+            var begin = character.LifeTime.BeginDate;
+            var end = character.LifeTime.EndDate;
+
             StringBuilder beginTimePrefix = new StringBuilder(String.Empty);
-            StringBuilder endTimePrefix = new StringBuilder(String.Empty); ;
+            StringBuilder endTimePrefix = new StringBuilder(String.Empty);
 
-            if(begin < 0)
+            if (begin != null)
             {
-                beginTimePrefix.Append(Bby);
-            }
-            if(begin > 0)
-            {
-                beginTimePrefix.Append(Aby);
+                if (begin > 0)
+                {
+                    beginTimePrefix.Append(SwConstants.Aby);
+                }
+                if (begin < 0)
+                {
+                    beginTimePrefix.Append(SwConstants.Bby);
+                    begin *= -1;
+                }
             }
 
-            if (end < 0)
+            if (end != null)
             {
-                endTimePrefix.Append(Bby);
-            }
-            if (end > 0)
-            {
-                endTimePrefix.Append(Aby);
+                if (end > 0)
+                {
+                    endTimePrefix.Append(SwConstants.Aby);
+                }
+                if (end < 0)
+                {
+                    endTimePrefix.Append(SwConstants.Bby);
+                    end *= -1;
+                }
             }
 
             return $"{beginTimePrefix.ToString()}{begin} - {endTimePrefix.ToString()}{end}";
+        }
+
+        private int CalculateAge(Entities.Character character)
+        {
+            var lifeTime = character.LifeTime;
+
+            if (lifeTime == null)
+            {
+                return 0;
+            }
+
+            if(lifeTime.BeginDate == null)
+            {
+                return 0;
+            }
+
+            if (lifeTime.EndDate == null)
+            {
+                return 0;
+            }
+
+            return (int)lifeTime.EndDate - (int)lifeTime.BeginDate;
         }
     }
 }

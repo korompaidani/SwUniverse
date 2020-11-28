@@ -21,9 +21,11 @@ namespace StarWars.Data.Models.Creatures.Character
 
         public IList<SocietyOutputModel> MemberOf { get; set; }
 
-        public int BeginDate { get; set; }
+        public int? BirthDate { get; set; }
 
-        public int EndDate { get; set; }
+        public int? DeathDate { get; set; }
+
+        public bool IsLifeTimeSet => BirthDate != null || DeathDate != null ? true : false;
 
         public bool IsSpeciesKindSet => SpeciesName != null ? true : false;
 

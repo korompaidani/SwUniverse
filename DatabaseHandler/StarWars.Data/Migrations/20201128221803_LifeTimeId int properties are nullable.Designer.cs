@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarWars.Data.DbContexts;
 
 namespace StarWars.Data.Migrations
 {
     [DbContext(typeof(SwContext))]
-    partial class SwContextModelSnapshot : ModelSnapshot
+    [Migration("20201128221803_LifeTimeId int properties are nullable")]
+    partial class LifeTimeIdintpropertiesarenullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +35,7 @@ namespace StarWars.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid?>("LifeTimeId")
+                    b.Property<Guid>("LifeTimeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -250,7 +252,9 @@ namespace StarWars.Data.Migrations
                 {
                     b.HasOne("StarWars.Data.Entities.LifeTime", "LifeTime")
                         .WithMany()
-                        .HasForeignKey("LifeTimeId");
+                        .HasForeignKey("LifeTimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("StarWars.Data.Entities.Species", "Species")
                         .WithMany()
