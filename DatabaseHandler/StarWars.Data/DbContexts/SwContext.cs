@@ -21,6 +21,7 @@ namespace StarWars.Data.DbContexts
         public DbSet<Species> Species { get; set; }
         public DbSet<Planet> Planets { get; set; }
         public DbSet<Society> Society { get; set; }
+        public DbSet<Affiliation> Affiliations { get; set; }
         public DbSet<PlanetDescription> PlanetDescriptions { get; set; }
         public DbSet<CharactersInFilms> CharactersInFilms { get; set; }
         public DbSet<CharactersInSeries> CharactersInSeries { get; set; }

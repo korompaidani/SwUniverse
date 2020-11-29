@@ -10,7 +10,7 @@ namespace StarWars.Data.Services
     public class CharacterService : ICharacterService
     {
         private readonly ISpeciesService _speciesService;
-        private readonly ISocietyService _societyService;
+        private readonly IAffiliationService _affiliationService;
         private readonly ILifeTimeService _lifeTimeService;
 
         private readonly ICharacterRepository _characterRepository;
@@ -18,7 +18,7 @@ namespace StarWars.Data.Services
 
         public CharacterService(
             ISpeciesService speciesService, 
-            ISocietyService societyService, 
+            IAffiliationService affiliationService, 
             ILifeTimeService lifeTimeService, 
             ICharacterRepository characterRepository, 
             IMapper mapper)
@@ -26,8 +26,8 @@ namespace StarWars.Data.Services
             _speciesService = speciesService ??
                 throw new ArgumentNullException(nameof(speciesService));
 
-            _societyService = societyService ??
-                throw new ArgumentNullException(nameof(societyService));
+            _affiliationService = affiliationService ??
+                throw new ArgumentNullException(nameof(affiliationService));
 
             _lifeTimeService = lifeTimeService ??
                 throw new ArgumentNullException(nameof(lifeTimeService));

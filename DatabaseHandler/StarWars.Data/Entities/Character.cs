@@ -30,8 +30,8 @@ namespace StarWars.Data.Entities
 
         public Guid? LifeTimeId { get; set; }
 
-        public ICollection<Society> MemberOf { get; set; }
-            = new List<Society>();
+        public ICollection<Affiliation> MemberOf { get; set; }
+            = new List<Affiliation>();
 
         public ICollection<CharactersInFilms> CharactersInFilms { get; set; }
             = new List<CharactersInFilms>();

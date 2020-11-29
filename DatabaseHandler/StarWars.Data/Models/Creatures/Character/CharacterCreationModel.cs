@@ -19,7 +19,7 @@ namespace StarWars.Data.Models.Creatures.Character
         [MaxLength(50, ErrorMessage = "The SpeciesName shouldn't have more than 50 characters")]
         public string SpeciesName { get; set; }
 
-        public IList<SocietyOutputModel> MemberOf { get; set; }
+        public IList<AffiliationOutputModel> MemberOf { get; set; }
 
         public int? BirthDate { get; set; }
 

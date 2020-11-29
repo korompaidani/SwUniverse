@@ -42,12 +42,12 @@ namespace DatabaseHandler
 
             services.AddScoped<ICharacterRepository, CharacterRepository>();
             services.AddScoped<ISpeciesRepository, SpeciesRepository>();
-            services.AddScoped<ISocietyRepository, SocietyRepository>();
+            services.AddScoped<IAffiliationRepository, AffiliationRepository>();
             services.AddScoped<ILifeTimeRepository, LifeTimeRepository>();
 
             services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<ISpeciesService, SpeciesService>();
-            services.AddScoped<ISocietyService, SocietyService>();
+            services.AddScoped<IAffiliationService, AffiliationService>();
             services.AddScoped<ILifeTimeService, LifeTimeService>();
         }
 
