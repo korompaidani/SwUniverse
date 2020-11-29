@@ -16,7 +16,7 @@ namespace StarWars.Data.DbContexts
             modelBuilder.Entity<CharactersInSeries>().HasKey(cf => new { cf.CharacterId, cf.SeriesId });
 
             //OneToOne
-            modelBuilder.Entity<Species>().HasOne(a => a.Character).WithOne(b => b.Species).HasForeignKey<Character>(b => b.SpeciesName);
+            modelBuilder.Entity<Species>().HasOne(a => a.Character).WithOne(b => b.Species).HasForeignKey<Character>(b => b.SpeciesId);
             modelBuilder.Entity<LifeTime>().HasOne(a => a.Character).WithOne(b => b.LifeTime).HasForeignKey<Character>(b => b.LifeTimeId);
             modelBuilder.Entity<Gender>().HasOne(a => a.Character).WithOne(b => b.Gender).HasForeignKey<Character>(b => b.GenderId);
             modelBuilder.Entity<Color>().HasOne(a => a.CharacterForHair).WithOne(b => b.HairColor).HasForeignKey<Character>(b => b.HairColorId);
@@ -47,7 +47,6 @@ namespace StarWars.Data.DbContexts
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Ship> Ships { get; set; }
         public DbSet<Affiliation> Affiliations { get; set; }
-        public DbSet<PlanetDescription> PlanetDescriptions { get; set; }
         public DbSet<CharactersInFilms> CharactersInFilms { get; set; }
         public DbSet<CharactersInSeries> CharactersInSeries { get; set; }
 

@@ -34,11 +34,6 @@ namespace StarWars.Data.Services
             throw new NotImplementedException();
         }
 
-        public SpeciesOutputModel GetDefaultSpecies()
-        {
-            return _mapper.Map<SpeciesOutputModel>(_speciesRepository.GetDefaultSpecies());
-        }
-
         public SpeciesOutputModel GetSpecies(string speciesName)
         {
             return _mapper.Map<SpeciesOutputModel>(_speciesRepository.GetSpecies(speciesName));

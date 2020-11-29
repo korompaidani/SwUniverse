@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarWars.Data.DbContexts;
 
 namespace StarWars.Data.Migrations
 {
     [DbContext(typeof(SwContext))]
-    partial class SwContextModelSnapshot : ModelSnapshot
+    [Migration("20201129161056_PlanetDescription has been removed")]
+    partial class PlanetDescriptionhasbeenremoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,8 +109,8 @@ namespace StarWars.Data.Migrations
                     b.Property<string>("Specialrecognizance")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("SpeciesId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("SpeciesName")
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<int>("Weight")
                         .HasColumnType("int");
@@ -151,9 +153,9 @@ namespace StarWars.Data.Migrations
                         .IsUnique()
                         .HasFilter("[SkinColorId] IS NOT NULL");
 
-                    b.HasIndex("SpeciesId")
+                    b.HasIndex("SpeciesName")
                         .IsUnique()
-                        .HasFilter("[SpeciesId] IS NOT NULL");
+                        .HasFilter("[SpeciesName] IS NOT NULL");
 
                     b.ToTable("Characters");
                 });
@@ -356,10 +358,6 @@ namespace StarWars.Data.Migrations
 
             modelBuilder.Entity("StarWars.Data.Entities.Species", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
@@ -367,7 +365,7 @@ namespace StarWars.Data.Migrations
                     b.Property<Guid?>("PlanetForNativeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
                     b.HasIndex("PlanetForNativeId");
 
@@ -448,7 +446,7 @@ namespace StarWars.Data.Migrations
 
                     b.HasOne("StarWars.Data.Entities.Species", "Species")
                         .WithOne("Character")
-                        .HasForeignKey("StarWars.Data.Entities.Character", "SpeciesId");
+                        .HasForeignKey("StarWars.Data.Entities.Character", "SpeciesName");
 
                     b.Navigation("CharacterForApprentice");
 

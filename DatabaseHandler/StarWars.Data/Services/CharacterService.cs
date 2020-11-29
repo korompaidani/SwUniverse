@@ -63,8 +63,13 @@ namespace StarWars.Data.Services
 
         private void AddSpeciesToCharacterIfSet(CharacterCreationModel character, ref Character outCharacter)
         {
-            var tempSpecies = character.IsSpeciesKindSet ? _speciesService.GetOrCreateSpecies(character.SpeciesName) : _speciesService.GetDefaultSpecies();
-            outCharacter.SpeciesName = tempSpecies.Name;
+            var tempSpecies = character.IsSpeciesKindSet ? 
+                _speciesService.GetOrCreateSpecies(character.SpeciesName) : null;
+
+            if (tempSpecies != null)
+            {
+                outCharacter.SpeciesId = tempSpecies.Id;
+            }
         }
 
         private void AddLifeTimeToCharacterIfSet(CharacterCreationModel character, ref Character outCharacter)

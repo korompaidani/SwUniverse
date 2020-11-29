@@ -6,7 +6,6 @@ namespace StarWars.Data.Services
     {
         SpeciesOutputModel CreateSpecies(SpeciesCreationModel species);
         bool IsSpeciesAlreadyExist(SpeciesCreationModel species);
-        SpeciesOutputModel GetDefaultSpecies();
         SpeciesOutputModel GetSpecies(string speciesName);
         SpeciesOutputModel GetOrCreateSpecies(string speciesName);
     }

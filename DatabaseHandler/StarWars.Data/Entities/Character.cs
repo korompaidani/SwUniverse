@@ -55,10 +55,10 @@ namespace StarWars.Data.Entities
 
         public Guid? HomeWorldId { get; set; }
 
-        [ForeignKey("SpeciesName")]
+        [ForeignKey("SpeciesId")]
         public Species Species { get; set; }
 
-        public string SpeciesName { get; set; }
+        public Guid? SpeciesId { get; set; }
 
         [ForeignKey("LifeTimeId")]
         public LifeTime LifeTime { get; set; }

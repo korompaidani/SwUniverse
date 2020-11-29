@@ -7,7 +7,6 @@ namespace StarWars.Data.Repositories
 {
     public class SpeciesRepository : ISpeciesRepository
     {
-        private const string DefaultSpeciesName = "Unknown";
         private readonly SwContext _context;
 
         public bool HasDefaultSpecies { get; }
@@ -15,7 +14,6 @@ namespace StarWars.Data.Repositories
         public SpeciesRepository(SwContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            CreateDefaultSpeciesIfNecessary();
         }
 
         public void CreateSpecies(Species species)
@@ -28,11 +26,6 @@ namespace StarWars.Data.Repositories
             _context.Species.Add(species);
 
             SaveChanges();
-        }
-
-        public Species GetDefaultSpecies()
-        {
-            return _context.Species.FirstOrDefault(s => s.Name == DefaultSpeciesName);
         }
 
         public Species GetSpecies(string speciesName)
@@ -53,22 +46,6 @@ namespace StarWars.Data.Repositories
             }
 
             return _context.Species.Any(s => s.Name == speciesName);
-        }
-
-        private void CreateDefaultSpeciesIfNecessary() 
-        {
-            Species tempSpecies = null;
-            if (!_context.Species.Any(s => s.Name == DefaultSpeciesName))
-            {
-                tempSpecies = new Species
-                {
-                    Name = DefaultSpeciesName
-                };
-
-                _context.Species.Add(tempSpecies);
-
-                SaveChanges();
-            }
         }
 
         public bool SaveChanges()
