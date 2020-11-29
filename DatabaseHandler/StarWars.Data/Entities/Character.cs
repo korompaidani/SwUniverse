@@ -15,10 +15,10 @@ namespace StarWars.Data.Entities
         public string Name { get; set; }
 
         [MaxLength(50)]
-        public string FamilyName { get; set; }
+        public string GivenName { get; set; }
 
         [MaxLength(50)]
-        public string GivenName { get; set; }
+        public string FamilyName { get; set; }
 
         [ForeignKey("SpeciesName")]
         public Species Species { get; set; }

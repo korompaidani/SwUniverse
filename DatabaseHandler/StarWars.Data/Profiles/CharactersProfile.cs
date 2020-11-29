@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Common;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace StarWars.Data.Profiles
@@ -13,7 +15,8 @@ namespace StarWars.Data.Profiles
             CreateMap<Models.Creatures.Character.CharacterCreationModel, Models.Creatures.Character.CharacterOutputModel>();
             CreateMap<Entities.Character, Models.Creatures.Character.CharacterOutputModel>()
                 .ForMember(charOut => charOut.FullFormOfAge, m => m.MapFrom(character => CreateFullFormFromAge(character)))
-                .ForMember(charOut => charOut.Age, m => m.MapFrom(character => CalculateAge(character)));
+                .ForMember(charOut => charOut.Age, m => m.MapFrom(character => CalculateAge(character)))
+                .ForMember(charOut => charOut.Affiliation, m => m.MapFrom(character => GetAffiliationIfExist(character)));
         }
 
         private string CreateFullFormFromAge(Entities.Character character)
@@ -78,6 +81,16 @@ namespace StarWars.Data.Profiles
             }
 
             return (int)lifeTime.EndDate - (int)lifeTime.BeginDate;
+        }
+
+        private IList<string> GetAffiliationIfExist(Entities.Character character)
+        {
+            if(character.MemberOf == null || character.MemberOf.Count == 0)
+            {
+                return null;
+            }
+
+            return character.MemberOf.Select(a => a.Name).ToList();
         }
     }
 }
