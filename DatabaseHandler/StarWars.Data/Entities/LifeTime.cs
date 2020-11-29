@@ -9,5 +9,6 @@ namespace StarWars.Data.Entities
         public Guid Id { get; set; }
         public int? BeginDate { get; set; }
         public int? EndDate { get; set; }
+        public Character Character { get; set; }
     }
 }

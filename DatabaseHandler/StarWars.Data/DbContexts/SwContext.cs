@@ -13,6 +13,8 @@ namespace StarWars.Data.DbContexts
         {
             modelBuilder.Entity<CharactersInFilms>().HasKey(cf => new { cf.CharacterId, cf.FilmId });
             modelBuilder.Entity<CharactersInSeries>().HasKey(cf => new { cf.CharacterId, cf.SeriesId });
+            modelBuilder.Entity<Species>().HasOne(a => a.Character).WithOne(b => b.Species).HasForeignKey<Character>(b => b.SpeciesName);
+            modelBuilder.Entity<LifeTime>().HasOne(a => a.Character).WithOne(b => b.LifeTime).HasForeignKey<Character>(b => b.LifeTimeId);
         }
 
         public DbSet<Character> Characters { get; set; }

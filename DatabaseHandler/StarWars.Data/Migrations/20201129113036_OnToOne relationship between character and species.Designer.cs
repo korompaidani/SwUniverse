@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StarWars.Data.DbContexts;
 
 namespace StarWars.Data.Migrations
 {
     [DbContext(typeof(SwContext))]
-    partial class SwContextModelSnapshot : ModelSnapshot
+    [Migration("20201129113036_OnToOne relationship between character and species")]
+    partial class OnToOnerelationshipbetweencharacterandspecies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,9 +75,7 @@ namespace StarWars.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LifeTimeId")
-                        .IsUnique()
-                        .HasFilter("[LifeTimeId] IS NOT NULL");
+                    b.HasIndex("LifeTimeId");
 
                     b.HasIndex("SpeciesName")
                         .IsUnique()
@@ -260,8 +260,8 @@ namespace StarWars.Data.Migrations
             modelBuilder.Entity("StarWars.Data.Entities.Character", b =>
                 {
                     b.HasOne("StarWars.Data.Entities.LifeTime", "LifeTime")
-                        .WithOne("Character")
-                        .HasForeignKey("StarWars.Data.Entities.Character", "LifeTimeId");
+                        .WithMany()
+                        .HasForeignKey("LifeTimeId");
 
                     b.HasOne("StarWars.Data.Entities.Species", "Species")
                         .WithOne("Character")
@@ -347,11 +347,6 @@ namespace StarWars.Data.Migrations
             modelBuilder.Entity("StarWars.Data.Entities.Film", b =>
                 {
                     b.Navigation("CharactersInFilms");
-                });
-
-            modelBuilder.Entity("StarWars.Data.Entities.LifeTime", b =>
-                {
-                    b.Navigation("Character");
                 });
 
             modelBuilder.Entity("StarWars.Data.Entities.Planet", b =>

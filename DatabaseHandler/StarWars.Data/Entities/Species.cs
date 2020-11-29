@@ -11,5 +11,7 @@ namespace StarWars.Data.Entities
         [Key]
         [MaxLength(15)]
         public string Name { get; set; }
+
+        public Character Character { get; set; }
     }
 }
