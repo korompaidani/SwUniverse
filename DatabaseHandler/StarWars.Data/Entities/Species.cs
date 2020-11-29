@@ -13,5 +13,7 @@ namespace StarWars.Data.Entities
         public string Name { get; set; }
 
         public Character Character { get; set; }
+
+        public Planet PlanetForNative { get; set; }
     }
 }

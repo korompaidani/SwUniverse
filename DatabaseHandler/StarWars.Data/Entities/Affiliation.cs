@@ -14,5 +14,7 @@ namespace StarWars.Data.Entities
         public string Description { get; set; }
 
         public string History { get; set; }
+
+        public Character CharacterAsMember { get; set; }
     }
 }

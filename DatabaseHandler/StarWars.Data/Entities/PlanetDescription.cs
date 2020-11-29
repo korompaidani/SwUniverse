@@ -15,20 +15,5 @@ namespace StarWars.Data.Entities
 
         public Guid PlanetId { get; set; }
 
-        [MaxLength(1500)]
-        public string ShortDescription { get; set; }
-
-        public string Description { get; set; }
-
-        public string History { get; set; }
-
-        public string FloraAndFauna { get; set; }
-
-        public string Geography { get; set; }
-
-        public bool IsCrystalSite { get; set; }
-
-        public ICollection<Species> NativeSpecies { get; set; }
-            = new List<Species>();
     }
 }
